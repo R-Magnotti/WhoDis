@@ -10,7 +10,7 @@ WhoDis is a self-hostable support assistant for businesses of any size. A custom
 
 The motivation is accessibility. WhoDis is built around a small language model that runs on modest hardware, so a local shop with a basic website can run it on its own machine instead of paying for a hosted enterprise tool, while the same architecture is designed to scale up for larger teams.
 
-The name is a play on "new phone, who dis?", the stock reply to a text from an unknown number. That is the question WhoDis answers for every incoming ticket: who is this, and what do they need?
+**The name is a play on "new phone, who dis?", the stock reply to a text from an unknown number. That is the question WhoDis answers for every incoming ticket: who is this, and what do they need?**
 
 ## The idea
 
