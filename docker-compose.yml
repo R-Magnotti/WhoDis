@@ -1,0 +1,33 @@
+# docker-compose.yml
+# Describes the whole WhoDis stack so one command starts everything, wired together.
+
+services:
+
+  # The Postgres database.
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: whodis
+      POSTGRES_DB: whodis
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  # The Node + Express backend.
+  backend:
+    image: node:22
+    working_dir: /app/backend
+    command: node server.js
+    volumes:
+      # Mount the project so the container runs the actual code.
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db   # start the database before the backend
+
+# A named place on the machine where Postgres keeps its data, outside any container.
+volumes:
+  db-data:
