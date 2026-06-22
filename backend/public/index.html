@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhoDis</title>
+</head>
+<body style="max-width: 600px; margin: 40px auto; font-family: sans-serif;">
+  <h1>WhoDis</h1>
+
+  <textarea id="text" rows="3" placeholder="Describe the issue..." style="width: 100%; box-sizing: border-box;"></textarea>
+  <button id="submit" style="margin-top: 8px;">Submit ticket</button>
+
+  <h2 style="margin-top: 32px;">Tickets</h2>
+  <ul id="list"></ul>
+
+  <script>
+    const textEl = document.getElementById('text');
+    const listEl = document.getElementById('list');
+
+    // Fetch the current tickets and draw them as list items.
+    async function loadTickets() {
+      const res = await fetch('/tickets');
+      const tickets = await res.json();
+      listEl.innerHTML = '';
+      for (const t of tickets) {
+        const li = document.createElement('li');
+        li.textContent = `#${t.id} ${t.body} (${t.category})`;
+        listEl.appendChild(li);
+      }
+    }
+
+    // Send a new ticket, then refresh the list.
+    async function submitTicket() {
+      const text = textEl.value.trim();
+      if (!text) return;
+      await fetch('/tickets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ body: text }),
+      });
+      textEl.value = '';
+      loadTickets();
+    }
+
+    document.getElementById('submit').addEventListener('click', submitTicket);
+
+    // Load tickets when the page opens.
+    loadTickets();
+  </script>
+</body>
+</html>

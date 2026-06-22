@@ -3,6 +3,7 @@
 
 const express = require('express');
 const { Pool } = require('pg');
+const path = require('path');
 
 // --- Database connection ---
 // A Pool manages a set of reusable connections to Postgres.
@@ -19,6 +20,7 @@ const pool = new Pool({
 // --- App setup ---
 const app = express();
 app.use(express.json()); // parse incoming JSON bodies into req.body
+app.use(express.static(path.join(__dirname, 'public')));
 
 // --- Routes ---
 
