@@ -57,7 +57,7 @@ Planned: clone the repository, then start the full stack with Docker Compose.
 ## Roadmap
 
 - [x] System design and architecture
-- [ ] Walking skeleton (end to end, message to stored ticket)
+- [x] Walking skeleton (end to end, message to stored ticket)
 - [ ] Classification and the answer / ask / escalate logic
 - [ ] Routing and queues
 - [ ] Dashboard and charts
